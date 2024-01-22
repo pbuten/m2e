@@ -1,0 +1,64 @@
+<?php
+/** @var $block \Buten\M2E\Block\Orders */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<?php
+$gray = '#f7f8f9';
+$lightGray = '#e5e5e5';
+$count = 1;
+?>
+<?php if ($block->isRegistered()) : ?>
+    <table>
+        <tbody>
+        <tr style="background-color: <?= $count % 2 ? $gray : $lightGray ?>">
+            <th class="col label">
+                <?= $escaper->escapeHtml(__('ID')) ?>
+            </th>
+            <th class="col label">
+                <?= $escaper->escapeHtml(__('Purchase Date')) ?>
+            </th>
+            <th class="col label">
+                <?= $escaper->escapeHtml(__('Ship-to Name')) ?>
+            </th>
+            <th class="col label">
+                <?= $escaper->escapeHtml(__('Customer Email')) ?>
+            </th>
+            <th class="col label">
+                <?= $escaper->escapeHtml(__('Grand Total')) ?>
+            </th>
+            <th class="col label">
+                <?= $escaper->escapeHtml(__('Status')) ?>
+            </th>
+        </tr>
+        <?php foreach ($block->getOrdersCollection() as $order) :?>
+            <tr style="background-color: <?= $count % 2 ? $gray : $lightGray ?>">
+                <?php foreach ($order->getData() as $id => $property) :?>
+                    <?php if ($id == 'm2e_orders_id') : continue;  endif;?>
+                    <?php if ($id == 'grand_total') : $property = number_format($property, 2);  endif;?>
+                    <td class="col data" data-th="<?= $escaper->escapeHtmlAttr($id) ?>">
+                        <?= $escaper->escapeHtml($property) ?>
+                    </td>
+                <?php endforeach; ?>
+            </tr>
+            <?php $count++ ?>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+    <style >
+        .col.label{
+            line-height: 35px;
+            vertical-align: middle;
+            padding-left: 10px;
+        }
+        .col.data{
+            line-height: 35px;
+            vertical-align: middle;
+        }
+    </style>
+
+<?php else: ?>
+    <div>
+        <span><?= $escaper->escapeHtml(__('You have to enter register data first here: '))?></span>
+        <span><a class="primary" href="<?= 'user' ?>">Register</a></span>
+    </div>
+<?php endif; ?>

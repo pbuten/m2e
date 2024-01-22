@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="buten_m2e_orders" resource="default" engine="innodb" comment="buten_m2e_orders Table">
+		<column xsi:type="int" name="m2e_orders_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+		<constraint xsi:type="primary" referenceId="PRIMARY">
+			<column name="m2e_orders_id"/>
+		</constraint>
+		<column name="order_id" nullable="false" xsi:type="varchar" comment="Order id" length="255"/>
+		<column name="purchase_date" nullable="true" xsi:type="datetime" comment="Purchase date"/>
+		<column name="ship_to_name" nullable="true" xsi:type="varchar" comment="Ship_to name" length="255"/>
+		<column name="customer_email" nullable="true" xsi:type="varchar" comment="Customer mail" length="255"/>
+		<column name="grand_total" nullable="true" xsi:type="float" comment="Grand total (purchased)"/>
+		<column name="status" nullable="true" xsi:type="varchar" comment="Status" length="255"/>
+	</table>
+</schema>
