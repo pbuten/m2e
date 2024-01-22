@@ -1,0 +1,31 @@
+<?php
+/** @var $block \Buten\M2E\Block\Orders */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<?php if ($block->isRegistered()) : ?>
+    <div><?= $escaper->escapeHtml(__('Please select xml  or csv file with orders to upload.'))?></div>
+    <form class="upload-form"
+          name="UploadFrom"
+          action="<?= $block->getUploadFormAction() ?>"
+          id="upload-form"
+          method="post"
+          enctype='multipart/form-data'
+          autocomplete="off"
+    >
+        <input type="file"
+               name="upload_file"
+               id="file-upload"/>
+        <button type="submit"
+                class="action submit primary "
+                title="<?= $escaper->escapeHtml(__('Submit')) ?>" >
+                  <span>
+                    <?= $escaper->escapeHtml(__('Submit')) ?>
+                  </span>
+        </button>
+    </form>
+<?php else: ?>
+    <div>
+        <span><?= $escaper->escapeHtml(__('You have to enter register data first here: '))?></span>
+        <span><a class="primary" href="<?= 'user' ?>">Register</a></span>
+    </div>
+<?php endif; ?>

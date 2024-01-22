@@ -1,0 +1,27 @@
+<?php
+/** @var $block \Buten\M2E\Block\Common */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<?php
+$url = $block->getUrl('m2e/orders/ajax');
+?>
+<h1 class="page-title"><?= $escaper->escapeHtml(__('Responsible user'))?></h1>
+<div id="bodyContentMain">
+</div>
+<script type="text/javascript">
+    require(['jquery'], function($){
+        $(document).ready(function() {
+            setTimeout(function(){
+                $.ajax({
+                    context: '#bodyContentMain',
+                    url: '<?= $url ?>',
+                    type: "POST",
+                    data: {'scope':'user'},
+                }).done(function (data) {
+                    $('#bodyContentMain').html(data.result);
+                    return true;
+                });
+            },1000);
+        });
+    });
+</script>

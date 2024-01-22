@@ -1,0 +1,70 @@
+<?php
+/** @var $block \Buten\M2E\Block\User */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<?php if (!$block->isRegistered()) : ?>
+    <div class="row">
+        <div class="col-md-8">
+            <form name="addData" method="post" id="addData" class="form"
+                  action="<?= $block->getFormAction(); ?>"
+                  data-hasrequired="<?= $escaper->escapeHtmlAttr(__('* Required Fields')) ?>"
+                  data-mage-init='{"validation":{}}'>
+                <fieldset class="fieldset">
+                    <legend class="legend"><span><?= $escaper->escapeHtmlAttr(__('Please Fill Details')) ?></span></legend>
+                    <fieldset class="fieldset row">
+                        <div class="fields col-md-6">
+                            <div class="field name required">
+                                <label class="label"
+                                       for="title"><span><?= $escaper->escapeHtmlAttr(__('Name')) ?></span></label>
+                                <div class="control">
+                                    <input name="name" id="name" title="Name" value="" class="input-text" type="text"
+                                           data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                                </div>
+                            </div>
+                            <div class="field name required">
+                                <label class="label"
+                                       for="title"><span><?= $escaper->escapeHtmlAttr(__('Email')) ?></span></label>
+                                <div class="control">
+                                    <input name="email" id="email" title="Email" value="" class="input-text" type="text"
+                                           data-validate="{required:true, 'validate-email':true}">
+                                </div>
+                            </div>
+                            <div class="field name required">
+                                <label class="label"
+                                       for="title"><span><?= $escaper->escapeHtmlAttr(__('Phone')) ?></span></label>
+                                <div class="control">
+                                    <input name="phone" id="phone" title="Phone" value="" class="input-text"
+                                           type="text" data-validate="{required:true}">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </fieldset>
+                <div class="actions-toolbar">
+                    <div class="primary">
+                        <button type="submit" class="action submit primary" title="Save">
+                            <span><?= $escaper->escapeHtmlAttr(__('Save')) ?></span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<?php else: ?>
+    <div>
+        <?php foreach ($block->getUserData() as $field => $value) : ?>
+            <div>
+                <span class="field-title"><?= $escaper->escapeHtml(strtoupper(__($field))) ?></span>
+                <span class="field-value"><?= $escaper->escapeHtml($value) ?></span>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <div><a class="primary" href="<?= 'upload' ?>">Upload Orders</a></div>
+    <div><a class="primary" href="<?= 'view' ?>">View Orders</a></div>
+    <style >
+        .field-title {
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+    </style>
+<?php endif; ?>
+
